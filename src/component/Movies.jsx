@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-
+import { NavLink } from 'react-router';
 const Movies = () => {
        const[allMovies,setAllMovies]=useState([])
         const options = {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import MoviePoster from './MoviePoster';
 
 const Trending = () => {
   const[movies,setMovies]=useState(true);
@@ -34,12 +35,14 @@ const Trending = () => {
             {
               return(
               <li key={item.id} className='mb-8'>
-                <img  className={`${movies?"h-[280px] w-[200px] ":"h-[280px] w-[340px]"} object-contain`} src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.id} />
-                <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{movies?item.title:item.original_name}</p>  
-                <div className='flex gap-1 items-end'>
-                  <p className='   font-medium text-[15px] text-red-900 mr-4 text-center rounded-md'>{item.original_language}</p>
-                  <p className='text-[15px]'>{movies?item.release_date:item.first_air_date}</p>
-                </div>
+                <MoviePoster
+                 id={item.id}
+                 movies={movies} 
+                 poster_path={item.poster_path} 
+                 language={item.original_language}
+                 title={movies?item.title:item.original_name}
+                 release_date={movies?item.release_date:item.first_air_date}
+                  />
                  
               </li>
               )
