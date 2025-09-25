@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import MoviePoster from './MoviePoster';
-
+import useAPI from '../context/useAPI';
 const Trending = () => {
   const[movies,setMovies]=useState(true);
-  const[trend,setTrend]=useState([]);
-    const options = {
-      method: 'GET',
-      headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
-      } 
-    };
-  useEffect(()=>{
-    const callFunc=async()=>
-    {
-      const data=await fetch(`https://api.themoviedb.org/3/trending/${movies?"movie":"tv"}/day?language=en-US`,options);
-      const res=await data.json();
-      setTrend(res.results);
-      console.log(res.results);
-
-    }
-    callFunc();
-  },[movies])
+  const endPoint=movies?"/trending/movie/day":"/trending/tv/day";
+  const{data,loading,error}=useAPI(endPoint,1);
+  if(loading) return<p>loading...</p>
+ if(error) return<p>Some error Occur</p> 
   return (
     <div>
       <div className='flex justify-items-center gap-4 mb-8'>
@@ -31,7 +16,7 @@ const Trending = () => {
       </div>
       <ul className='grid grid-cols-5 gap-4 '>
           {
-            trend.map((item)=>
+            data.map((item)=>
             {
               return(
               <li key={item.id} className='mb-8'>

@@ -1,32 +1,17 @@
-import  { useEffect, useState } from 'react'
+import useAPI from"../context/useAPI";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay, Navigation} from 'swiper/modules';
 const Carasouel = () => {
-  const[carasouelData,setCarasouelData]=useState([])
-  const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
-  }
-};
-  useEffect(()=>{
-  const callData=async()=>
-  {
-   const data=await fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`, options);
-   const res= await data.json();
-   setCarasouelData(res.results)
-   console.log(res.results);
-  }
-  callData()
-},[])
+ const{data,loading,error}=useAPI("/movie/now_playing",1);
+if(loading) return<p>loading...</p>
+if(error) return<p>Some error Occur</p>
   return (
     <div className=' px-10 mt-10 pb-10'>
       <h1 className='text-[25px] font-medium text-green-800 mb-5'>Featured </h1>
       <Swiper navigation={true} modules={[Autoplay,Navigation]} spaceBetween={30} slidesPerView={5} loop={true} autoplay={{delay:2500}} className="mySwiper">
         {
-         carasouelData.slice(7,14).map((item)=>
+         data.slice(7,14).map((item)=>
         (
           <SwiperSlide key={item.id}>
             <img className='h-[400px] rounded' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />

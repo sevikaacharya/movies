@@ -1,6 +1,7 @@
-import React from 'react'
+import { useParams } from "react-router"
 
 const Description = () => {
+  const {id}=useParams();
   return (
     <div>
       

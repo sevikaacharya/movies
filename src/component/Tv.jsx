@@ -1,24 +1,9 @@
 import {useState,useEffect}from 'react'
-
+import useAPI from '../context/useAPI';
 const Tv = () => {
-       const[allTv,setAllTv]=useState([])
-          const options = {
-            method: 'GET',
-            headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
-            }
-          };
-        useEffect(()=>{
-        const callData=async()=>
-        {
-         const data=await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
-         const res= await data.json();
-         setAllTv(res.results)
-         console.log("tv=",res.results);
-        }
-        callData()
-      },[])
+const{data,loading,error}=useAPI("/tv/popular",1);
+if(loading) return<p>loading...</p>
+if(error) return<p>Some error Occur</p> 
   return (
     <div className='mt-7'>
         <div className='flex justify-between mb-6'>
@@ -27,7 +12,7 @@ const Tv = () => {
         </div>
         <ul className='grid grid-cols-5 gap-4'>
           {
-           allTv.map((item)=>{
+           data.map((item)=>{
             return(
               <li key={item.id} className='mb-8'>
                   <img className='h-[280px] w-[200px] object-contain' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />
