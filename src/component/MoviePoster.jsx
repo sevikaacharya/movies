@@ -3,7 +3,7 @@ import { NavLink } from "react-router"
 
 const MoviePoster = ({id,movies,poster_path,title,language,release_date}) => {
   return (
-    <NavLink to={`/movies/${id}`}>
+    <NavLink to={`movies?"/movies":"tv"`}>
         <img  className={`${movies?"h-[280px] w-[200px] ":"h-[280px] w-[340px]"} object-contain`} src={`https://image.tmdb.org/t/p/w1280/${poster_path}`} alt={id} />
         <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{title}</p>  
         <div className='flex gap-1 items-end'>
