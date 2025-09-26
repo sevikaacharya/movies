@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MoviePoster from './MoviePoster';
 import useAPI from '../context/useAPI';
 const Trending = () => {

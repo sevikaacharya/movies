@@ -1,4 +1,5 @@
 import './App.css'
+import Description from './component/Description';
 import Foot from './component/Foot'
 import Main from './component/Main'
 import ViewAllMovies from './component/ViewAllMovies';
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main/>} />
         <Route path="/movies" element={<ViewAllMovies/>} />
-        <Route path="/movies/:movieName" element={<ViewAllMovies/>} />
+        <Route path="/movies/:movieName" element={<Description/>} />
         <Route path="/tv/:tvName" />
        
         
