@@ -16,7 +16,7 @@ if(error) return<p>Some error Occur</p>
          data.slice(7,14).map((item)=>
         (
           <SwiperSlide key={item.id}>
-              <NavLink to={`/movie/now_playing/${item.id}` }>
+              <NavLink to={`/movie/${item.id}` }>
                  <img className='h-[400px] rounded' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />
                  <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{item.title}</p>  
                  <div className='flex gap-1 items-end'>

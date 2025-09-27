@@ -21,7 +21,7 @@ const Trending = () => {
             {
               return(
               <li key={item.id} className='mb-8'>
-               <NavLink to={`/trending/${movies?"movie":"tv"}/${item.id}`}>
+               <NavLink to={`/${movies?"movie":"tv"}/${item.id}`}>
                 <MoviePoster
                  id={item.id}
                  movies={movies} 
