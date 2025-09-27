@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import MoviePoster from './MoviePoster';
 import useAPI from '../context/useAPI';
+import { NavLink } from 'react-router';
 const Trending = () => {
   const[movies,setMovies]=useState(true);
   const endPoint=movies?"/trending/movie/day":"/trending/tv/day";
@@ -20,6 +21,7 @@ const Trending = () => {
             {
               return(
               <li key={item.id} className='mb-8'>
+               <NavLink to={`/trending/${movies?"movie":"tv"}/${item.id}`}>
                 <MoviePoster
                  id={item.id}
                  movies={movies} 
@@ -28,6 +30,7 @@ const Trending = () => {
                  title={movies?item.title:item.original_name}
                  release_date={movies?item.release_date:item.first_air_date}
                   />
+               </NavLink>
                  
               </li>
               )

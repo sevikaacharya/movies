@@ -1,5 +1,5 @@
 import './App.css'
-import Foot from './component/Foot'
+import Description from './component/Description';
 import Main from './component/Main'
 import ViewAllMovies from './component/ViewAllMovies';
 import {BrowserRouter,Routes,Route} from 'react-router';
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main/>} />
         <Route path="/movies" element={<ViewAllMovies/>} />
-        <Route path="/movies/:movieName" element={<ViewAllMovies/>} />
+        <Route path="/:type/:endPoint/:id" element={<Description/>} />
         <Route path="/tv/:tvName" />
        
         

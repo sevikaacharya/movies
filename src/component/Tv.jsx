@@ -1,6 +1,8 @@
-import {useState,useEffect}from 'react'
+
 import useAPI from '../context/useAPI';
+import MoviePoster from './MoviePoster';
 const Tv = () => {
+const movies=false;
 const{data,loading,error}=useAPI("/tv/popular",1);
 if(loading) return<p>loading...</p>
 if(error) return<p>Some error Occur</p> 
@@ -15,12 +17,14 @@ if(error) return<p>Some error Occur</p>
            data.map((item)=>{
             return(
               <li key={item.id} className='mb-8'>
-                  <img className='h-[280px] w-[200px] object-contain' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />
-                  <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{item.name}</p>  
-                  <div className='flex gap-1 items-end'>
-                     <p className='   font-medium text-[15px] text-red-900 mr-4 text-center rounded-md'>{item.original_language}</p>
-                     <p className='text-[15px]'>{item.first_air_date}</p>
-                  </div>
+                <MoviePoster
+                 id={item.id}
+                 movies={movies} 
+                 poster_path={item.poster_path} 
+                 language={item.original_language}
+                 title={movies?item.title:item.original_name}
+                 release_date={movies?item.release_date:item.first_air_date}
+                  />
               </li>
             )
            })
