@@ -2,9 +2,11 @@ import { useParams } from "react-router";
 import useAPI from "../context/useAPI";
 import { FaBookmark } from "react-icons/fa6";
 import Nav from "./Nav";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 
 const Description = () => {
+  const {addToWatchlist}=useContext(GlobalContext);
   const { type, id } = useParams();
   const { data, loading, error } = useAPI(`/${type}/${id}`);
 
@@ -31,7 +33,7 @@ const Description = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!data) return <p>No data found</p>;
-
+  
   return (
     <div>
       <Nav />
@@ -105,7 +107,7 @@ const Description = () => {
                 <p className="bg-yellow-500 w-[100px] text-center rounded h-[30px] pt-1">
                   Tmdb: {data.vote_average}
                 </p>
-                <p className="text-3xl">
+                <p className="text-3xl" onClick={()=>addToWatchlist(data,type)}>
                   <FaBookmark />
                 </p>
               </div>
