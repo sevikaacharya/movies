@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 const tmdb_base = "https://api.themoviedb.org/3";
 
-const useAPI = (endPoint, page = 1) => {
-  const [data, setData] = useState(null);   // null works for both object & array
+const useAPI = (endPoint, page = 1, searchData = "") => {
+  const [data, setData] = useState(null); // null works for both object & array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,21 +17,21 @@ const useAPI = (endPoint, page = 1) => {
 
   useEffect(() => {
     const callData = async () => {
-      setLoading(true);
-      setError(null);
       try {
-        const res = await fetch(
-          `${tmdb_base}${endPoint}?language=en-US&page=${page}`,
-          options
-        );
-        if (!res.ok) throw new Error("Failed to fetch");
+        let url = `${tmdb_base}${endPoint}?language=en-US&page=${page}`;
+
+        // Add search query if endpoint is a search
+        if (endPoint.includes("/search/") && searchData) {
+          url += `&query=${encodeURIComponent(searchData)}`;
+        }
+
+        const res = await fetch(url, options);
         const json = await res.json();
 
-        // ✅ Decide if it's a list or a single object
         if (json.results) {
-          setData(json.results); // list endpoint (popular, trending, now_playing)
+          setData(json.results);
         } else {
-          setData(json); // single endpoint (/movie/:id, /tv/:id)
+          setData(json);
         }
       } catch (err) {
         setError(err.message);
@@ -39,8 +39,9 @@ const useAPI = (endPoint, page = 1) => {
         setLoading(false);
       }
     };
+
     callData();
-  }, [endPoint, page]);
+  }, [endPoint, page, searchData]);
 
   return { data, loading, error };
 };

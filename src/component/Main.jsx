@@ -46,21 +46,21 @@ const Main = () => {
         <Movies/>
         <Tv/>
       </div>
-      <div className=' w-[500px]' >
+      <div className=' w-[500px]  hidden md:block lg:block'  >
         <h1 className='mb-8 text-[25px] font-medium text-green-800'>Top IMDB Rating</h1>
-        <ul >
+        <ul c >
           {
             topRatedData.map(item=>{
               return(
-                <li key={item.id} >
+                <li key={item.id} className='w-[100px]' >
                  <NavLink className='flex mb-4 gap-5 ' to={`/tv/${item.id}`}>
-                     <img  className='h-[200px] rounded' src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} alt={item.title} />
+                     <img  className='h-[150px] rounded' src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} alt={item.title} />
                      <div >
-                       <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{item.name}</p>  
-                       <div className='flex gap-1 items-end'>
-                       <p className='   font-medium text-[15px] text-red-900 mr-4 text-center rounded-md'>{item.original_language}</p>
+                       <p className='text-[15px] mt-4 mb-1 font-medium lg:w-[130px] md:w-[100px] truncate'>{item.name}</p>  
+                     
+                       <p className='   font-medium text-[15px] text-red-900 mr-4 rounded-md'>{item.original_language}</p>
                        <p className='text-[15px]'>{item.first_air_date}</p>
-                      </div>
+                      
         
                   </div>
                  </NavLink>

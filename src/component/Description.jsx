@@ -6,13 +6,21 @@ import { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 const Description = () => {
-  const {addToWatchlist}=useContext(GlobalContext);
+  const {addToWatchlist,deleteWatchlist,watchlist}=useContext(GlobalContext);
   const { type, id } = useParams();
   const { data, loading, error } = useAPI(`/${type}/${id}`);
-
+  const[bookmark,setBookmark]=useState(false);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [episodeNumber, setEpisodeNumber] = useState(null);
-
+  const handleBookmark=()=>{
+    if(!bookmark){
+      addToWatchlist(data);
+    }
+    else{
+      deleteWatchlist(data.id);
+    }
+    setBookmark(!bookmark);
+  }
   // Initialize default season after data loads
   useEffect(() => {
     if (type === "tv" && data?.seasons?.length > 0) {
@@ -20,7 +28,12 @@ const Description = () => {
       setEpisodeNumber(data.seasons[0]);
     }
   }, [data, type]);
-
+   useEffect(() => {
+    if (data) {
+      const exists = watchlist.some((item) => item.id === data.id);
+      setBookmark(exists);
+    }
+  }, [data, watchlist]);
   const showEp = (e) => {
     const seasonNum = parseInt(e.target.value);
     const seasonObj = data.seasons.find(
@@ -38,7 +51,7 @@ const Description = () => {
     <div>
       <Nav />
       <div
-        className="mt-8 bg-no-repeat bg-center bg-cover h-[670px]"
+        className=" bg-no-repeat bg-center bg-cover h-[670px]"
         style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w500/${data.backdrop_path})` }}
       >
         <div className="w-full h-full bg-black/50 backdrop-blur-sm flex justify-center items-center">
@@ -107,7 +120,7 @@ const Description = () => {
                 <p className="bg-yellow-500 w-[100px] text-center rounded h-[30px] pt-1">
                   Tmdb: {data.vote_average}
                 </p>
-                <p className="text-3xl" onClick={()=>addToWatchlist(data,type)}>
+                <p className={`${bookmark?"text-black":"text-white"} text-3xl`} onClick={handleBookmark}>
                   <FaBookmark />
                 </p>
               </div>
