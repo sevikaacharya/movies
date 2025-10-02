@@ -40,15 +40,15 @@ const Main = () => {
       </div>
     </div>
      <Carasouel/>
-     <div className='mx-10 flex gap-[80px]     '>
-      <div>
+     <div className=' mx-10 flex gap-8    '>
+      <div className='w-[2170px]'>
         <Trending/>
         <Movies/>
         <Tv/>
       </div>
       <div className=' w-[500px]  hidden md:block lg:block'  >
         <h1 className='mb-8 text-[25px] font-medium text-green-800'>Top IMDB Rating</h1>
-        <ul c >
+        <ul className='' >
           {
             topRatedData.map(item=>{
               return(

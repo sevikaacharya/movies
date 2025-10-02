@@ -54,10 +54,10 @@ const Description = () => {
         className=" bg-no-repeat bg-center bg-cover h-[670px]"
         style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w500/${data.backdrop_path})` }}
       >
-        <div className="w-full h-full bg-black/50 backdrop-blur-sm flex justify-center items-center">
-          <div className="flex gap-8 pl-8 text-white">
-            <div className="w-[400px]">
-              <img src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.id} />
+        <div className=" h-full bg-black/50 backdrop-blur-sm flex justify-center items-center">
+          <div className=" flex   gap-8 pl-8 text-white">
+            <div className="w-[200px] md:w-[300px] lg:w-[400px]">
+              <img className=" w-[200px] md:w-[300px] lg:w-[400px]" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.id} />
             </div>
             <div className=" ">
               <p className="text-[40px] font-medium">

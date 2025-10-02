@@ -30,7 +30,7 @@ if(error) return<p>Some error Occur</p>
         (
           <SwiperSlide key={item.id}>
               <NavLink to={`/movie/${item.id}` }>
-                 <img className=' h-[250px] md:h-[300px] lg:h-[350px] rounded' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />
+                 <img className=' h-[300px] md:h-[300px] lg:h-[350px] rounded' src={`https://image.tmdb.org/t/p/w1280/${item.poster_path}`} alt={item.title} />
                  <p className='text-[15px] mt-4 mb-1 font-medium truncate'>{item.title}</p>  
                  <div className='flex gap-1 items-end'>
                  <p className='   font-medium text-[15px] text-red-900 mr-4 text-center rounded-md'>{item.original_language}</p>

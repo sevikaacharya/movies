@@ -32,8 +32,8 @@
     return (
       <div>
         <Nav/>
-        <div className='flex mt-10 justify-self-center '>
-          <ul className='grid grid-cols-5 gap-4 w-[1200px]'>
+        <div className=' px-3 lg:px-10 md:px-8  '>
+          <ul className='flex flex-wrap gap-6 mx-8 my-10'>
             {
             viewAllMovies.map((item)=>{
               return(

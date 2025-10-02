@@ -15,7 +15,7 @@ const Trending = () => {
         <button onClick={()=>setMovies(true)} className={`${movies?"bg-green-800 text-white":" text-black"} text-[17px] h-[35px] w-[80px]  rounded mr-1`}>Movies</button>
         <button onClick={()=>setMovies(false)} className={`${!movies?"bg-green-800 text-white":"text-black"} text-[17px] h-[35px] w-[80px] rounded mr-1`}>Series</button>
       </div>
-      <ul className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-8'>
+      <ul className='flex flex-wrap gap-8 '>
           {
             data.map((item)=>
             {

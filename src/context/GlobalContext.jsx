@@ -1,9 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const GlobalContext=createContext(null);
 export const GlobalProvider=({children})=>
 {
-  const[watchlist,setWatchlist]=useState([]);
-  const[allreadyWatched,setAllReadyWatched]=useState([]);
+  const[watchlist,setWatchlist]=useState(()=>{
+    const saved=localStorage.getItem("watchlist");
+    return saved?JSON.parse(saved):[]});
+  const[allreadyWatched,setAllReadyWatched]=useState(()=>{
+    const saved=localStorage.getItem("allreadyWatched");
+    return saved?JSON.parse(saved):
+    []});
+  useEffect(()=>{
+    localStorage.setItem("watchlist",JSON.stringify(watchlist));
+   
+  },[watchlist])
+  useEffect(()=>{
+    localStorage.setItem("allreadyWatched",JSON.stringify(allreadyWatched));
+  },[allreadyWatched]);
   const handleAlreadyWatched=(id)=>
   {
    const item=watchlist.find((item)=>item.id===id);
